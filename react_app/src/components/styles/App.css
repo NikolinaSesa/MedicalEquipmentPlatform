@@ -40,7 +40,7 @@
     color:#008CBA;
 }
 
-.login-form-container {
+.form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,6 +52,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
     text-align: center;
     width: 400px;
 }
@@ -75,6 +76,61 @@
     cursor: pointer;
 }
   
-  .login-form button:hover {
+.login-form button:hover {
     background: #0056b3;
 }
+
+.signup-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+}
+
+.signup-form{
+    width: 600px;
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.inputs-div {
+    display: flex;
+    justify-content: space-between;
+    max-width: 550px;
+    margin: 0 auto;
+}
+  
+.column {
+    width: 45%;
+}
+
+.inputs-div input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-form button {
+    width: 40%;
+    padding: 10px;
+    margin: 10px;
+    background: #008CBA;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.signup-form button:hover {
+    background: #0056b3;
+}
+
+
+
+

@@ -11,7 +11,7 @@ function Login(){
             <div className="navbar">
                 <a href="/">Home</a>
             </div>
-            <div className="login-form-container">
+            <div className="form-container">
                 <form className="login-form">
                     <h2>Login</h2>
                     <input
