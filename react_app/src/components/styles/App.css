@@ -28,6 +28,17 @@
     padding: 20px;
 }
 
+.caption2 {
+    text-align: left;
+    font-size: 18px;
+    padding-left: 30px;
+    padding-top: 25px;
+}
+
+.caption2 h2{
+    color:#008CBA;
+}
+
 .grid {
     padding: 30px;
 }

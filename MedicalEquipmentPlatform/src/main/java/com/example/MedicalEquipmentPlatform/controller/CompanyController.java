@@ -43,7 +43,7 @@ public class CompanyController {
         AddressDTO addressDTO = new AddressDTO(company.getAddress().getId(), company.getAddress().getAddress(), company.getAddress().getCity(), company.getAddress().getZipCode(), company.getAddress().getCountry());
 
         List<EquipmentDTO> equipmentDTOs = new ArrayList<EquipmentDTO>();
-        for(Equipment equipment : company.getEquipments()){
+        for(Equipment equipment : company.getEquipment()){
             EquipmentDTO equipmentDTO = new EquipmentDTO(equipment.getId(), equipment.getName(), equipment.getQuantity());
             equipmentDTOs.add(equipmentDTO);
 
@@ -63,7 +63,7 @@ public class CompanyController {
             AddressDTO addressDTO = new AddressDTO(company.getAddress().getId(), company.getAddress().getAddress(), company.getAddress().getCity(), company.getAddress().getZipCode(), company.getAddress().getCountry());
 
             List<EquipmentDTO> equipmentDTOs = new ArrayList<EquipmentDTO>();
-            for(Equipment equipment : company.getEquipments()){
+            for(Equipment equipment : company.getEquipment()){
                 EquipmentDTO equipmentDTO = new EquipmentDTO(equipment.getId(), equipment.getName(), equipment.getQuantity());
                 equipmentDTOs.add(equipmentDTO);
             }

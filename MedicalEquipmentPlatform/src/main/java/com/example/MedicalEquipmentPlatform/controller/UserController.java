@@ -33,6 +33,11 @@ public class UserController {
     public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO){
         User user = userService.create(userDTO);
 
+        if(user == null) {
+
+            return new ResponseEntity<>(HttpStatus.valueOf(409));
+
+        }
         UserDTO newUserDTO = new UserDTO(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCity(), user.getCountry(), user.getPhoneNumber(), user.getProfession(), user.getCompanyInformation());
 
         return new ResponseEntity<>(newUserDTO, HttpStatus.CREATED);

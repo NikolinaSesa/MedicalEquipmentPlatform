@@ -18,8 +18,8 @@ function FirstPage(){
             setCompanies(result)
         }).catch((err) => {
             console.log(err)
-        }, [])
-    })
+        })
+    }, [])
 
     return(
         <body>
@@ -46,7 +46,10 @@ function FirstPage(){
                                 <b>Address:</b> {val.addressDTO.address}, {val.addressDTO.city}, {val.addressDTO.zipCode}, {val.addressDTO.country}
                             </Typography>
                             <Typography component="div">
-                                <p className="blue-text">Click for more</p>
+                                <p className="blue-text" onClick={() => {
+                                    localStorage.setItem('companyId', val.id)
+                                    window.location.href='/EquipmentByCompany'
+                                }}>Click for more</p>
                             </Typography>
                         </Paper>
                     </Grid>
