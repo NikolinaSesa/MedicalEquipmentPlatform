@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.MedicalEquipmentPlatform.model.User;
@@ -29,7 +31,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> create(@RequestBody UserDTO userDTO){
         User user = userService.create(userDTO);
 
@@ -40,7 +42,17 @@ public class UserController {
         }
         UserDTO newUserDTO = new UserDTO(user.getId(), user.getEmail(), user.getPassword(), user.getFirstName(), user.getLastName(), user.getCity(), user.getCountry(), user.getPhoneNumber(), user.getProfession(), user.getCompanyInformation());
 
-        return new ResponseEntity<>(newUserDTO, HttpStatus.CREATED);
+        return new ResponseEntity<>(newUserDTO, HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
+    public ResponseEntity<?> confirmUserAccount(@RequestParam("token")String confirmationToken) {
+        User user = userService.confirmEmail(confirmationToken);
+
+        if(user == null){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        return ResponseEntity.ok("Email verified successfully.");
     }
 
     @GetMapping(value = "/{email}/{password}", produces = MediaType.APPLICATION_JSON_VALUE)

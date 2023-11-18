@@ -45,6 +45,9 @@ public class User {
     @Column
     private String companyInformation;
 
+    @Column 
+    private Boolean isEnabled;
+
     public User(){}
 
     public User(String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String profession, String companyInformation){   
@@ -70,5 +73,19 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.profession = profession;
         this.companyInformation = companyInformation;
+    }
+
+    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String profession, String companyInformation, Boolean isEnabled){
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.profession = profession;
+        this.companyInformation = companyInformation;
+        this.isEnabled = isEnabled;
     }
 }

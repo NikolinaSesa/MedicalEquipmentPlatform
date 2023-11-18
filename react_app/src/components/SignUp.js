@@ -24,7 +24,7 @@ function SignUp(){
 
         if(passwordsMatch){
 
-            fetch("http://localhost:8080/api/user/create", {
+            fetch("http://localhost:8080/api/user/register", {
                 headers: {
                     'Content-Type':'application/json'
                 },
@@ -32,7 +32,7 @@ function SignUp(){
                 body:JSON.stringify(newUser)
             }).then(res => res.json()).then((result) => {
                 console.log(result)
-                window.alert('Successfuly created new account.')
+                window.alert('A verification email has been sent to : '+email)
                 window.location.href='/Login'
             }).catch((err) => {
                 console.log(err)
