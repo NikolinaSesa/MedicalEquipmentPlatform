@@ -14,8 +14,6 @@ INSERT INTO company(average_rating, company_name, description, address_id) VALUE
 INSERT INTO company(average_rating, company_name, description, address_id) VALUES(3.6, 'Cardinal Health', 'Kompanija medicinske opreme', 6);
 INSERT INTO company(average_rating, company_name, description, address_id) VALUES(3.9, 'GE Healthcare', 'Kompanija medicinske opreme', 7);
 
-INSERT INTO users(city, company_information, country, email, first_name, last_name, password, phone_number, profession, is_enabled) VALUES('Novi Sad', 'Privatna bolica New Hospital', 'Srbija', 'miloslala@gmail.com', 'Milos', 'Mirnic', '123', '0643456576', 'Secretary', true);
-
 INSERT INTO equipment(name, quantity, company_id) VALUES('Plasters', 10000, 1);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Surgical mask', 100000, 1);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Urine sample', 200, 1);
@@ -43,6 +41,27 @@ INSERT INTO equipment(name, quantity, company_id) VALUES('Crutch', 35, 5);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Needle', 1200, 5);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Electrodes', 200, 5);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Stethoscope', 40, 5);
+
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('miloslala@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Milos', 'Mirnic', 'Novi Sad', 'Srbija', '0612345467', 'ROLE_SYSTEM_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anja00dim@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Anja', 'Dimitrijevic', 'Novi Sad', 'Srbija', '0608798767', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('dragasvircevic@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Draga', 'Svircevic', 'Novi Sad', 'Srbija', '0657869000', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('milicajoca@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Milica', 'Gugleta', 'Novi Sad', 'Srbija', '0612345412', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('natalisubasic@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Natalija', 'Subasic', 'Novi Sad', 'Srbija', '0645673422', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anasesa03@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Ana', 'Sesa', 'Novi Sad', 'Srbija', '0675874666', 'ROLE_USER');
+
+INSERT INTO system_admins(user_id) VALUES(1);
+
+INSERT INTO company_admins(user_id, company_id) VALUES(2, 1);
+INSERT INTO company_admins(user_id, company_id) VALUES(3, 2);
+INSERT INTO company_admins(user_id, company_id) VALUES(4, 3);
+INSERT INTO company_admins(user_id, company_id) VALUES(5, 4);
+
+INSERT INTO regular_users(user_id, is_enabled, company_information, profession) VALUES(6, true, 'Privatna bolnica NewHospital', 'Secretary');
+
+
+
+
+
 
 
 

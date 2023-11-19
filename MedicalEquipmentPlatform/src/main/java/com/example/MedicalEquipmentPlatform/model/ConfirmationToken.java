@@ -31,9 +31,9 @@ public class ConfirmationToken {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @OneToOne(targetEntity = RegularUser.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
-    private User user;
+    private RegularUser user;
 
     public ConfirmationToken(){}
 
@@ -43,7 +43,7 @@ public class ConfirmationToken {
         this.createdDate = createdDate;
     }
 
-    public ConfirmationToken(User user) {
+    public ConfirmationToken(RegularUser user) {
         this.user = user;
         createdDate = new Date();
         confirmationToken = UUID.randomUUID().toString();

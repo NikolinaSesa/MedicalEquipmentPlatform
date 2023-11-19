@@ -40,6 +40,9 @@ public class Company {
 
     @OneToMany(mappedBy = "company")
     private List<Equipment> equipment;
+
+    @OneToMany(mappedBy = "company")
+    private List<CompanyAdmin> companyAdmins;
     
     public Company(){}
 
@@ -50,12 +53,13 @@ public class Company {
         this.address = address;
     }
 
-    public Company(Long id, String companyName, String description, Double averageRating, Address address, List<Equipment> equipment){
+    public Company(Long id, String companyName, String description, Double averageRating, Address address, List<Equipment> equipment, List<CompanyAdmin> companyAdmins){
         this.id = id;
         this.companyName = companyName;
         this.description = description;
         this.averageRating = averageRating;
         this.address = address;
         this.equipment = equipment;
+        this.companyAdmins = companyAdmins;
     }
 }

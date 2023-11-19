@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +15,9 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -40,17 +44,11 @@ public class User {
     private String phoneNumber;
 
     @Column
-    private String profession;
-
-    @Column
-    private String companyInformation;
-
-    @Column 
-    private Boolean isEnabled;
+    private String role;
 
     public User(){}
 
-    public User(String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String profession, String companyInformation){   
+    public User(String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role){   
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -58,11 +56,10 @@ public class User {
         this.city = city;
         this.country = country;
         this.phoneNumber = phoneNumber;
-        this.profession = profession;
-        this.companyInformation = companyInformation;
+        this.role = role;
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String profession, String companyInformation){
+    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role){
         this.id = id;
         this.email = email;
         this.password = password;
@@ -71,21 +68,7 @@ public class User {
         this.city = city;
         this.country = country;
         this.phoneNumber = phoneNumber;
-        this.profession = profession;
-        this.companyInformation = companyInformation;
+        this.role = role;
     }
 
-    public User(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String profession, String companyInformation, Boolean isEnabled){
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.city = city;
-        this.country = country;
-        this.phoneNumber = phoneNumber;
-        this.profession = profession;
-        this.companyInformation = companyInformation;
-        this.isEnabled = isEnabled;
-    }
 }
