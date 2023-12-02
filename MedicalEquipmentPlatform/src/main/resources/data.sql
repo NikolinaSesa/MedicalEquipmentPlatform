@@ -42,12 +42,12 @@ INSERT INTO equipment(name, quantity, company_id) VALUES('Needle', 1200, 5);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Electrodes', 200, 5);
 INSERT INTO equipment(name, quantity, company_id) VALUES('Stethoscope', 40, 5);
 
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('miloslala@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Milos', 'Mirnic', 'Novi Sad', 'Srbija', '0612345467', 'ROLE_SYSTEM_ADMIN');
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anja00dim@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Anja', 'Dimitrijevic', 'Novi Sad', 'Srbija', '0608798767', 'ROLE_COMPANY_ADMIN');
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('dragasvircevic@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Draga', 'Svircevic', 'Novi Sad', 'Srbija', '0657869000', 'ROLE_COMPANY_ADMIN');
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('milicajoca@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Milica', 'Gugleta', 'Novi Sad', 'Srbija', '0612345412', 'ROLE_COMPANY_ADMIN');
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('natalisubasic@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Natalija', 'Subasic', 'Novi Sad', 'Srbija', '0645673422', 'ROLE_COMPANY_ADMIN');
-INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anasesa03@gmail.com', '$2a$12$a3nq4iBK8Py8vJAewfrw5uoU2rttF44ip8xuZos0/e.NJjDN640RC', 'Ana', 'Sesa', 'Novi Sad', 'Srbija', '0675874666', 'ROLE_USER');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('miloslala@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Milos', 'Mirnic', 'Novi Sad', 'Srbija', '0612345467', 'ROLE_SYSTEM_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anja00dim@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Anja', 'Dimitrijevic', 'Novi Sad', 'Srbija', '0608798767', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('dragasvircevic@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Draga', 'Svircevic', 'Novi Sad', 'Srbija', '0657869000', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('milicajoca@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Milica', 'Gugleta', 'Novi Sad', 'Srbija', '0612345412', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('natalisubasic@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Natalija', 'Subasic', 'Novi Sad', 'Srbija', '0645673422', 'ROLE_COMPANY_ADMIN');
+INSERT INTO users(email, password, first_name, last_name, city, country, phone_number, role) VALUES('anasesa03@gmail.com', '$2a$10$6x5hs7PPoGLhzHn4FFThMeH1VohLh6BkzI6xx/EBR5pRuWeo0q/Ji', 'Ana', 'Sesa', 'Novi Sad', 'Srbija', '0675874666', 'ROLE_USER');
 
 INSERT INTO system_admins(user_id) VALUES(1);
 

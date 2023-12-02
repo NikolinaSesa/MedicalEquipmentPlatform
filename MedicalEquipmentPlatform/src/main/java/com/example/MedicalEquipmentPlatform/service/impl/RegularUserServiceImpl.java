@@ -2,6 +2,7 @@ package com.example.MedicalEquipmentPlatform.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.MedicalEquipmentPlatform.model.ConfirmationToken;
@@ -23,6 +24,8 @@ public class RegularUserServiceImpl implements RegularUserService{
     @Autowired
     EmailService emailService;
 
+    @Autowired
+    PasswordEncoder encoder;
 
     @Autowired
     public RegularUserServiceImpl(RegularUserRepository regularUserRepository){
@@ -36,6 +39,7 @@ public class RegularUserServiceImpl implements RegularUserService{
 
         if(existingUser == null){
             RegularUser regularUser = new RegularUser(regularUserDTO.getEmail(), regularUserDTO.getPassword(), regularUserDTO.getFirstName(), regularUserDTO.getLastName(), regularUserDTO.getCity(), regularUserDTO.getCountry(), regularUserDTO.getPhoneNumber(), "ROLE_USER", regularUserDTO.getProfession(), regularUserDTO.getCompanyInformation());
+            regularUser.setPassword(encoder.encode(regularUserDTO.getPassword()));
             RegularUser newRegularUser = regularUserRepository.save(regularUser);
 
             ConfirmationToken confirmationToken = new ConfirmationToken(newRegularUser);
