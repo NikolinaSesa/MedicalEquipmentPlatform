@@ -1,7 +1,10 @@
 package com.example.MedicalEquipmentPlatform.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -20,30 +23,37 @@ public class RegularUser extends User {
     @Column
     private String companyInformation;
 
-    @Column 
+    @Column
     private Boolean isEnabled;
 
-    public RegularUser(){
+    @OneToMany(mappedBy = "regularUser")
+    private List<Appointment> appointments;
+
+    public RegularUser() {
         super();
     }
 
-    public RegularUser(String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role, String profession, String companyInformation){
+    public RegularUser(String email, String password, String firstName, String lastName, String city, String country,
+            String phoneNumber, String role, String profession, String companyInformation) {
         super(email, password, firstName, lastName, city, country, phoneNumber, role);
         this.profession = profession;
         this.companyInformation = companyInformation;
     }
 
-    public RegularUser(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role, String profession, String companyInformation){
+    public RegularUser(Long id, String email, String password, String firstName, String lastName, String city,
+            String country, String phoneNumber, String role, String profession, String companyInformation) {
         super(id, email, password, firstName, lastName, city, country, phoneNumber, role);
         this.profession = profession;
         this.companyInformation = companyInformation;
     }
 
-    public RegularUser(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role, String profession, String companyInformation, Boolean isEnabled){
+    public RegularUser(Long id, String email, String password, String firstName, String lastName, String city,
+            String country, String phoneNumber, String role, String profession, String companyInformation,
+            Boolean isEnabled) {
         super(id, email, password, firstName, lastName, city, country, phoneNumber, role);
         this.profession = profession;
         this.companyInformation = companyInformation;
         this.isEnabled = isEnabled;
     }
-    
+
 }

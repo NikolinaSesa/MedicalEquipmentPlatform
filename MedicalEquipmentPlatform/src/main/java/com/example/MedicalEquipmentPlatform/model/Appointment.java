@@ -1,5 +1,7 @@
 package com.example.MedicalEquipmentPlatform.model;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -21,24 +23,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "equipment")
-public class Equipment {
+@Table(name = "appointment")
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String name;
+    private LocalDate date;
 
     @Column
-    private Long quantity;
+    private Duration duration;
 
     @ManyToOne
-    @JoinColumn(name = "companyId", nullable = false)
-    private Company company;
+    @JoinColumn(name = "companyAdminId", nullable = false)
+    private CompanyAdmin companyAdmin;
 
-    @OneToMany(mappedBy = "equipment")
+    @ManyToOne
+    @JoinColumn(name = "regularUserId")
+    private RegularUser regularUser;
+
+    @OneToMany(mappedBy = "appointment")
     private List<ReservedEquipment> reservedEquipments;
 
 }

@@ -1,5 +1,7 @@
 package com.example.MedicalEquipmentPlatform.model.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +20,13 @@ public class RegularUserDTO {
     private String role;
     private String profession;
     private String companyInformation;
-    
-    public RegularUserDTO(){}
+    private List<AppointmentDTO> appointmentDTOs;
 
-    public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String city, String country, String phoneNumber, String role, String profession, String companyInformation){
+    public RegularUserDTO() {
+    }
+
+    public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String city,
+            String country, String phoneNumber, String role, String profession, String companyInformation) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -33,5 +38,13 @@ public class RegularUserDTO {
         this.role = role;
         this.profession = profession;
         this.companyInformation = companyInformation;
+
+    }
+
+    public RegularUserDTO(Long id, String email, String firstName, String lastName) {
+        this.id = id;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

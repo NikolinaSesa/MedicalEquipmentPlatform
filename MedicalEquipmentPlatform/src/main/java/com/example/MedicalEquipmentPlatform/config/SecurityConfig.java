@@ -16,7 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import com.example.MedicalEquipmentPlatform.filter.JwtAuthFilter;
 import com.example.MedicalEquipmentPlatform.service.UserService;
@@ -30,47 +29,49 @@ public class SecurityConfig {
     private JwtAuthFilter authFilter;
 
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         return new UserService();
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception { 
-        
-        return http.csrf().disable() 
-                .authorizeHttpRequests() 
-                .requestMatchers("/api/user/register", "/api/user/confirm-account", "api/company/**", "api/company/", "/auth/generateToken").permitAll() 
-                .and() 
-                .authorizeHttpRequests().requestMatchers("/auth/**").authenticated() 
-                .and() 
-                .authorizeHttpRequests().requestMatchers("/api/**").authenticated() 
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        return http.csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/api/user/register", "/api/user/confirm-account", "api/company/**", "api/company/",
+                        "/auth/generateToken")
+                .permitAll()
                 .and()
-                .sessionManagement() 
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) 
+                .authorizeHttpRequests().requestMatchers("/auth/**").authenticated()
+                .and()
+                .authorizeHttpRequests().requestMatchers("/api/**").authenticated()
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .cors()
-                .and() 
-                .authenticationProvider(authenticationProvider()) 
-                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class) 
-                .build(); 
-    } 
-  
+                .and()
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
+    }
+
     @Bean
-    public PasswordEncoder passwordEncoder() { 
-        return new BCryptPasswordEncoder(); 
-    } 
-  
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
-    public AuthenticationProvider authenticationProvider() { 
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(); 
-        authenticationProvider.setUserDetailsService(userDetailsService()); 
-        authenticationProvider.setPasswordEncoder(passwordEncoder()); 
-        return authenticationProvider; 
-    } 
-  
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { 
-        return config.getAuthenticationManager(); 
-    } 
-    
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
 }
