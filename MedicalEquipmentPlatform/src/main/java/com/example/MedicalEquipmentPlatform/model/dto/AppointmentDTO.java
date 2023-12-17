@@ -1,9 +1,8 @@
 package com.example.MedicalEquipmentPlatform.model.dto;
 
-import java.sql.Date;
 import java.time.Duration;
-
-import com.example.MedicalEquipmentPlatform.model.CompanyAdmin;
+import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AppointmentDTO {
     private Long id;
-    private CompanyAdmin companyAdmin;
-    private Date date;
+    private CompanyAdminDTO companyAdminDTO;
+    private LocalDate date;
     private Duration duration;
+    private RegularUserDTO regularUserDTO;
+    private List<ReservedEquipmentDTO> reservedEquipmentDTOs;
+
 }

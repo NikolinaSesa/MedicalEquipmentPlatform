@@ -9,4 +9,5 @@ public interface RegularUserService {
 
     public RegularUser confirmEmail(String confirmationToken);
  
+    public RegularUser findById(Long id);
 }

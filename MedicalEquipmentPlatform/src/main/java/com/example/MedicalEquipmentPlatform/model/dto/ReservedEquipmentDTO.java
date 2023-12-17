@@ -13,6 +13,5 @@ public class ReservedEquipmentDTO {
 
     private Long id;
     private EquipmentDTO equipmentDTO;
-    private AppointmentDTO appointmentDTO;
     private Integer quantity;
 }

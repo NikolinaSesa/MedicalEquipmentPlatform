@@ -1,5 +1,7 @@
 package com.example.MedicalEquipmentPlatform.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -70,6 +72,15 @@ public class RegularUserServiceImpl implements RegularUserService{
             return regularUserRepository.save(regularUser);
         }
         return null;
+    }
+
+    @Override
+    public RegularUser findById(Long id){
+        Optional<RegularUser> regularUser = regularUserRepository.findById(id);
+        if(!regularUser.isPresent()) return null;
+
+        return new RegularUser(regularUser.get().getId(),  regularUser.get().getEmail(), regularUser.get().getPassword(), regularUser.get().getFirstName(), regularUser.get().getLastName(), regularUser.get().getCity(), regularUser.get().getCountry(), regularUser.get().getPhoneNumber(), regularUser.get().getRole(), regularUser.get().getProfession(), regularUser.get().getCompanyInformation());
+
     }
 
 }
