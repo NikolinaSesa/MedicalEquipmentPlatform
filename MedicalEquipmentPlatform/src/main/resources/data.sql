@@ -466,3 +466,33 @@ insert into
     )
 values
 ('2023-12-25', '20', 2, null);
+
+insert into
+    appointment(
+        date,
+        duration,
+        company_admin_id,
+        regular_user_id
+    )
+values
+('2023-12-25', '10', 2, null);
+
+insert into
+    appointment(
+        date,
+        duration,
+        company_admin_id,
+        regular_user_id
+    )
+values
+('2023-12-26', '20', 2, null);
+
+insert into
+    appointment(
+        date,
+        duration,
+        company_admin_id,
+        regular_user_id
+    )
+values
+('2023-12-27', '30', 2, null);

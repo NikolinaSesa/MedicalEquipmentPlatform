@@ -36,8 +36,6 @@ public class AppointmentController {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PutMapping(value = "/")
     public ResponseEntity<AppointmentDTO> reserveAppointment(@RequestBody AppointmentDTO appointmentDTO){
-        if(appointmentService.reserveAppointment(appointmentDTO) == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
         return new ResponseEntity<>(appointmentService.reserveAppointment(appointmentDTO), HttpStatus.OK);
     }
 

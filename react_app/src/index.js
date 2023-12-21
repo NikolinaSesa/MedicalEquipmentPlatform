@@ -9,6 +9,8 @@ import EquipmentByCompany from './components/EquipmentByCompany';
 import UserFirstPage from './components/UserFirstPage';
 import SysAdminFirstPage from './components/SysAdminFirstPage';
 import CompanyAdminFirstPage from './components/CompanyAdminFirstPage';
+import ReservationPage from './components/ReservationPage';
+import MyReservations from './components/MyReservations';
 
 ReactDOM.render(
   <Router>
@@ -20,6 +22,8 @@ ReactDOM.render(
       <Route path='/UserFirstPage' element={<UserFirstPage/>}/>
       <Route path='/SysAdminFirstPage' element={<SysAdminFirstPage/>}/>
       <Route path='/CompanyAdminFirstPage' element={<CompanyAdminFirstPage/>}/>
+      <Route path='/ReservationPage' element={<ReservationPage/>}/>
+      <Route path='/MyReservations' element={<MyReservations/>}/>
     </Routes>
   </Router>,
   document.getElementById('root')

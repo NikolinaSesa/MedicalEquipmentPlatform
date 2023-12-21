@@ -1,5 +1,6 @@
 package com.example.MedicalEquipmentPlatform.service.impl;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,11 @@ import com.example.MedicalEquipmentPlatform.model.dto.RegularUserDTO;
 import com.example.MedicalEquipmentPlatform.model.dto.ReservedEquipmentDTO;
 import com.example.MedicalEquipmentPlatform.repository.AppointmentRepository;
 import com.example.MedicalEquipmentPlatform.service.AppointmentService;
+import com.example.MedicalEquipmentPlatform.service.EmailService;
+import com.example.MedicalEquipmentPlatform.service.QRCodeService;
 import com.example.MedicalEquipmentPlatform.service.RegularUserService;
 import com.example.MedicalEquipmentPlatform.service.ReservedEquipmentService;
+import com.google.zxing.WriterException;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -35,6 +39,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public List<AppointmentDTO> findAvailableAppointments(Long companyId) {
@@ -59,9 +66,11 @@ public class AppointmentServiceImpl implements AppointmentService {
         if(!appointment.isPresent()) return null;
     
         appointment.get().setRegularUser(regularUserService.findById(appointmentDTO.getRegularUserDTO().getId()));
-        appointment.get().setReservedEquipments(reservedEquipmentService.reserveEquipment(appointmentDTO.getReservedEquipmentDTOs(), appointment.get()));
 
         Appointment updatedAppointment = appointmentRepository.save(appointment.get());
+
+        reservedEquipmentService.reserveEquipment(appointmentDTO.getReservedEquipmentDTOs(), updatedAppointment);
+
         AppointmentDTO updatedAppointmentDTO = this.modelMapper.map(updatedAppointment, AppointmentDTO.class);
         updatedAppointmentDTO.setCompanyAdminDTO(this.modelMapper.map(updatedAppointment.getCompanyAdmin(), CompanyAdminDTO.class));
         
@@ -74,6 +83,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         updatedAppointmentDTO.setReservedEquipmentDTOs(reservedEquipmentDTOs);
 
+        String QRCodeImagePath = "MedicalEquipmentPlatform/src/main/resources/QRCodes/QRCodeAppointment"+updatedAppointmentDTO.getId()+".jpg";
+        try{
+            QRCodeService.generateQRCodeImage(updatedAppointmentDTO.toString(), 250, 250, QRCodeImagePath);
+        }catch(WriterException | IOException e) {
+            e.printStackTrace();
+        }
+
+        //emailService.sendEmailWithQRCode(updatedAppointmentDTO.getRegularUserDTO().getEmail(), "Reserved appointment info", "Information about your reserved appointment...", QRCodeImagePath);
+        
         return updatedAppointmentDTO;
     }
 
@@ -82,7 +100,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<AppointmentDTO> appointmentDTOs = new ArrayList<>();
 
         for(Appointment appointment : appointmentRepository.findAll()){
-            if(appointment.getRegularUser().getId() == userId && appointment.getDate().isAfter(LocalDate.now())){
+            if(appointment.getRegularUser() != null && appointment.getRegularUser().getId() == userId && appointment.getDate().isAfter(LocalDate.now())){
                 AppointmentDTO appointmentDTO = this.modelMapper.map(appointment, AppointmentDTO.class);
                 appointmentDTO.setCompanyAdminDTO(this.modelMapper.map(appointment.getCompanyAdmin(), CompanyAdminDTO.class));
         

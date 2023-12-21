@@ -36,6 +36,7 @@ function Login(){
                 .then((reqResult) => {
                     window.alert('You are successfully logged in.')
                     if(reqResult.role === 'ROLE_USER'){
+                        localStorage.setItem('userId', reqResult.id)
                         window.location.href = "/UserFirstPage"
                     }else if(reqResult.role === 'ROLE_SYSTEM_ADMIN'){
                         window.location.href = '/SysAdminFirstPage'
