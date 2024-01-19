@@ -12,6 +12,7 @@ import com.example.MedicalEquipmentPlatform.model.Equipment;
 import com.example.MedicalEquipmentPlatform.model.ReservedEquipment;
 import com.example.MedicalEquipmentPlatform.model.dto.ReservedEquipmentDTO;
 import com.example.MedicalEquipmentPlatform.repository.ReservedEquipmentRepository;
+import com.example.MedicalEquipmentPlatform.service.EquipmentService;
 import com.example.MedicalEquipmentPlatform.service.ReservedEquipmentService;
 
 @Service
@@ -19,6 +20,8 @@ public class ReservedEquipmentServiceImpl implements ReservedEquipmentService{
     
     @Autowired
     private ReservedEquipmentRepository reservedEquipmentRepository;
+
+    @Autowired EquipmentService equipmentService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -32,6 +35,8 @@ public class ReservedEquipmentServiceImpl implements ReservedEquipmentService{
 
             reservedEquipment.setEquipment(equipment);
             reservedEquipment.setAppointment(appointment);
+
+            if(!equipmentService.reduceEquipmentQuantity(equipment.getId(), reservedEquipment.getQuantity())) return null;
 
             reservedEquipments.add(reservedEquipmentRepository.save(reservedEquipment));
         }

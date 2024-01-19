@@ -3,19 +3,17 @@ package com.example.MedicalEquipmentPlatform.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.MedicalEquipmentPlatform.model.Equipment;
 import com.example.MedicalEquipmentPlatform.repository.EquipmentRepository;
 import com.example.MedicalEquipmentPlatform.service.EquipmentService;
 
+@Service
 public class EquipmentServiceImpl implements EquipmentService {
     
-    private final EquipmentRepository equipmentRepository;
-
     @Autowired
-    public EquipmentServiceImpl(EquipmentRepository equipmentRepository){
-        this.equipmentRepository = equipmentRepository;
-    }
+    private EquipmentRepository equipmentRepository;
 
     @Override
     public Equipment findById(Long id){
@@ -25,5 +23,15 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public List<Equipment> findAll(){
         return equipmentRepository.findAll();
+    }
+
+    @Override
+    public Boolean reduceEquipmentQuantity(Long id, Integer reservedQuantity){
+        Equipment equipment = findById(id);
+        equipment.setQuantity(equipment.getQuantity() - reservedQuantity);
+
+        if(equipmentRepository.save(equipment) != null) return true;
+        
+        return false;
     }
 }

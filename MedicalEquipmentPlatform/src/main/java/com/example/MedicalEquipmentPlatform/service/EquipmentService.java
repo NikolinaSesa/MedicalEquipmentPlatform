@@ -9,4 +9,6 @@ public interface EquipmentService {
     List<Equipment> findAll();
 
     Equipment findById(Long id);
+
+    Boolean reduceEquipmentQuantity(Long id, Integer reservedQunatity);
 }
