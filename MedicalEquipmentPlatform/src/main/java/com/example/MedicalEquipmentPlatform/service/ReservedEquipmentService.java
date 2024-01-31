@@ -9,4 +9,6 @@ import com.example.MedicalEquipmentPlatform.model.dto.ReservedEquipmentDTO;
 public interface ReservedEquipmentService {
     
     List<ReservedEquipment> reserveEquipment(List<ReservedEquipmentDTO> reservedEquipmentDTOs, Appointment appointment);
+
+    Boolean quitReservation(List<ReservedEquipmentDTO> reservedEquipmentDTOs);
 }

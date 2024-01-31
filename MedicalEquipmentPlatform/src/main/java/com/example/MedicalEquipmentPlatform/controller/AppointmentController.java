@@ -44,4 +44,16 @@ public class AppointmentController {
     public ResponseEntity<List<AppointmentDTO>> getReservedAppointmentsByUser(@PathVariable Long userId){
         return new ResponseEntity<>(appointmentService.findReservedAppointmentsByUser(userId), HttpStatus.OK);
     }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @GetMapping(value = "/getById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable Long id){
+        return new ResponseEntity<>(appointmentService.findById(id), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PutMapping(value = "/quitAppointment")
+    public ResponseEntity<AppointmentDTO> quitAppointment(@RequestBody AppointmentDTO appointmentDTO){
+        return new ResponseEntity<>(appointmentService.quitAppointment(appointmentDTO), HttpStatus.OK);
+    }
 }

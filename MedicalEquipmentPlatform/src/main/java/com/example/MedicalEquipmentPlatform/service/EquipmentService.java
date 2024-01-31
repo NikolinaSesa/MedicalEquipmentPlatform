@@ -11,4 +11,6 @@ public interface EquipmentService {
     Equipment findById(Long id);
 
     Boolean reduceEquipmentQuantity(Long id, Integer reservedQunatity);
+
+    Boolean updateEquipmentQuantity(Long id, Integer quantity);
 }

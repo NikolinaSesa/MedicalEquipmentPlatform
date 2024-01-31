@@ -39,8 +39,15 @@ const ReservationPage = () => {
     }, [])
 
     const handleClick = val => {
+        const equipment = selectedEquipment.find((equipment) => equipment.equipmentDTO.id === val.id);
+        console.log(equipment);
+        if(equipment) {
+            setSelectedEquipment(selectedEquipment.map(equip => equip.equipmentDTO.id === equipment.equipmentDTO.id ? {...equip, quantity: equip.quantity + 1} : equip));
+            return;
+        }
+        
         setSelectedEquipment(selectedEquipment => [...selectedEquipment, {equipmentDTO: val, quantity: 1}])
-        console.log(selectedEquipment)
+        console.log(selectedEquipment);
     }
 
     const handleFinish = () => {

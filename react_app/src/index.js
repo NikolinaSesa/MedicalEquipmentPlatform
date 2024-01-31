@@ -11,6 +11,7 @@ import SysAdminFirstPage from './components/SysAdminFirstPage';
 import CompanyAdminFirstPage from './components/CompanyAdminFirstPage';
 import ReservationPage from './components/ReservationPage';
 import MyReservations from './components/MyReservations';
+import AppointmentDetailsPDF from './components/AppointmentDetailsPDF';
 
 ReactDOM.render(
   <Router>
@@ -24,6 +25,7 @@ ReactDOM.render(
       <Route path='/CompanyAdminFirstPage' element={<CompanyAdminFirstPage/>}/>
       <Route path='/ReservationPage' element={<ReservationPage/>}/>
       <Route path='/MyReservations' element={<MyReservations/>}/>
+      <Route path='/appointmentPDF' element={<AppointmentDetailsPDF/>}></Route>
     </Routes>
   </Router>,
   document.getElementById('root')

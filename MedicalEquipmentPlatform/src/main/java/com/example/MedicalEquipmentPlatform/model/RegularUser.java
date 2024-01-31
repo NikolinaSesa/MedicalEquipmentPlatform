@@ -26,6 +26,9 @@ public class RegularUser extends User {
     @Column
     private Boolean isEnabled;
 
+    @Column
+    private Integer penalNumber;
+
     @OneToMany(mappedBy = "regularUser")
     private List<Appointment> appointments;
 
@@ -45,6 +48,14 @@ public class RegularUser extends User {
         super(id, email, password, firstName, lastName, city, country, phoneNumber, role);
         this.profession = profession;
         this.companyInformation = companyInformation;
+    }
+
+    public RegularUser(Long id, String email, String password, String firstName, String lastName, String city,
+            String country, String phoneNumber, String role, String profession, String companyInformation, Integer penalNumber) {
+        super(id, email, password, firstName, lastName, city, country, phoneNumber, role);
+        this.profession = profession;
+        this.companyInformation = companyInformation;
+        this.penalNumber = penalNumber;
     }
 
     public RegularUser(Long id, String email, String password, String firstName, String lastName, String city,

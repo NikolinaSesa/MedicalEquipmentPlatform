@@ -20,6 +20,7 @@ public class RegularUserDTO {
     private String role;
     private String profession;
     private String companyInformation;
+    private Integer penalNumber;
     private List<AppointmentDTO> appointmentDTOs;
 
     public RegularUserDTO() {
@@ -38,7 +39,22 @@ public class RegularUserDTO {
         this.role = role;
         this.profession = profession;
         this.companyInformation = companyInformation;
+    }
 
+    public RegularUserDTO(Long id, String email, String password, String firstName, String lastName, String city,
+            String country, String phoneNumber, String role, String profession, String companyInformation, Integer penalNumber) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.profession = profession;
+        this.companyInformation = companyInformation;
+        this.penalNumber = penalNumber;
     }
 
     public RegularUserDTO(Long id, String email, String firstName, String lastName) {

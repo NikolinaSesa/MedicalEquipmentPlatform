@@ -34,4 +34,14 @@ public class EquipmentServiceImpl implements EquipmentService {
         
         return false;
     }
+
+    @Override
+    public Boolean updateEquipmentQuantity(Long id, Integer quantity){
+        Equipment equipment = findById(id);
+        equipment.setQuantity(equipment.getQuantity() + quantity);
+
+        if(equipmentRepository.save(equipment) != null) return true;
+
+        return false;
+    }
 }

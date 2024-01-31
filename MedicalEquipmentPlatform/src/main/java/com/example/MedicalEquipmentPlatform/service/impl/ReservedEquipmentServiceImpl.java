@@ -42,4 +42,15 @@ public class ReservedEquipmentServiceImpl implements ReservedEquipmentService{
         }
         return reservedEquipments;
     }
+
+    @Override
+    public Boolean quitReservation(List<ReservedEquipmentDTO> reservedEquipmentDTOs){
+
+        for(ReservedEquipmentDTO reservedEquipmentDTO : reservedEquipmentDTOs){
+            reservedEquipmentRepository.deleteById(reservedEquipmentDTO.getId());
+            equipmentService.updateEquipmentQuantity(reservedEquipmentDTO.getEquipmentDTO().getId(), reservedEquipmentDTO.getQuantity());
+        }
+
+        return true;
+    }
 }

@@ -1,7 +1,8 @@
 package com.example.MedicalEquipmentPlatform.service.impl;
 
-import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -83,6 +84,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
         updatedAppointmentDTO.setReservedEquipmentDTOs(reservedEquipmentDTOs);
 
+        /* 
         String QRCodeImagePath = "MedicalEquipmentPlatform/src/main/resources/QRCodes/QRCodeAppointment"+updatedAppointmentDTO.getId()+".jpg";
         try{
             QRCodeService.generateQRCodeImage(updatedAppointmentDTO.toString(), 250, 250, QRCodeImagePath);
@@ -90,8 +92,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             e.printStackTrace();
         }
 
-        //emailService.sendEmailWithQRCode(updatedAppointmentDTO.getRegularUserDTO().getEmail(), "Reserved appointment info", "Information about your reserved appointment...", QRCodeImagePath);
-        
+        emailService.sendEmailWithQRCode(updatedAppointmentDTO.getRegularUserDTO().getEmail(), "Reserved appointment info", "Information about your reserved appointment...", QRCodeImagePath);
+        */
         return updatedAppointmentDTO;
     }
 
@@ -116,5 +118,53 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
         }
         return appointmentDTOs;
+    }
+
+    @Override
+    public AppointmentDTO findById(Long id){
+        if(appointmentRepository.findById(id) != null){
+            Appointment appointment = this.modelMapper.map(appointmentRepository.findById(id), Appointment.class);
+            AppointmentDTO appointmentDTO = this.modelMapper.map(appointment, AppointmentDTO.class);
+            appointmentDTO.setCompanyAdminDTO(this.modelMapper.map(appointment.getCompanyAdmin(), CompanyAdminDTO.class));
+        
+            appointmentDTO.setRegularUserDTO(this.modelMapper.map(appointment.getRegularUser(), RegularUserDTO.class));
+            List<ReservedEquipmentDTO> reservedEquipmentDTOs = new ArrayList<>();
+            for(ReservedEquipment reservedEquipment : appointment.getReservedEquipments()){
+                ReservedEquipmentDTO reservedEquipmentDTO = this.modelMapper.map(reservedEquipment, ReservedEquipmentDTO.class);
+                reservedEquipmentDTO.setEquipmentDTO(this.modelMapper.map(reservedEquipment.getEquipment(), EquipmentDTO.class));
+                reservedEquipmentDTOs.add(reservedEquipmentDTO);
+            }
+            appointmentDTO.setReservedEquipmentDTOs(reservedEquipmentDTOs);
+            return appointmentDTO;
+        }
+        return null;
+    }
+
+    @Override
+    public AppointmentDTO quitAppointment(AppointmentDTO appointmentDTO){
+        Appointment appointment = findAppointment(appointmentDTO.getId());
+
+        //Duration duration = Duration.between(LocalDate.now(), appointmentDTO.getDate());
+        LocalDate date = appointmentDTO.getDate().plusDays(1);
+        if(date.isAfter(appointmentDTO.getDate())){
+            regularUserService.updatePenalNumber(appointmentDTO.getRegularUserDTO().getId(), 1);
+        }
+        regularUserService.updatePenalNumber(appointmentDTO.getRegularUserDTO().getId(), 2);
+        appointment.setRegularUser(null);
+        reservedEquipmentService.quitReservation(appointmentDTO.getReservedEquipmentDTOs());
+        appointment.setReservedEquipments(null);
+
+        Appointment freededAppointment = appointmentRepository.save(appointment);
+
+        AppointmentDTO freededAppointmentDTO = this.modelMapper.map(freededAppointment, AppointmentDTO.class);
+        freededAppointmentDTO.setCompanyAdminDTO(this.modelMapper.map(freededAppointment.getCompanyAdmin(), CompanyAdminDTO.class));
+
+        return freededAppointmentDTO;
+    } 
+
+    @Override 
+    public Appointment findAppointment(Long id){
+        Appointment appointment = this.modelMapper.map(appointmentRepository.findById(id), Appointment.class);
+        return appointment;
     }
 }

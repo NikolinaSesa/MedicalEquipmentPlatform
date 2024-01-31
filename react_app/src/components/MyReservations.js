@@ -22,6 +22,25 @@ const MyReservations = () => {
         ).catch(err => console.log(err))
     }, [])
 
+    const handleQuit = val => {
+        console.log(val);
+
+        fetch("http://localhost:8080/api/appointment/quitAppointment", {
+            method: "PUT",
+            headers: { 
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(val)
+        }).then(res => res.json()
+        ).then((result) => {
+            console.log(result);
+            window.alert("You successfully quit appointment.");
+            //window.location.reload();
+        }
+        ).catch((err) => console.log(err))
+    }
+
     return(
         <>
             <div className="navbar">
@@ -48,6 +67,8 @@ const MyReservations = () => {
                                     </ListItem>
                                 ))}
                             </List>
+                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3'}}>View Details</ListItemButton>
+                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3'}} onClick={handleQuit(val)}>Quit</ListItemButton>
                         </ListItem>
                     ))}
                 </List>

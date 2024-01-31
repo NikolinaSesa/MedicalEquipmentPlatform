@@ -83,4 +83,18 @@ public class RegularUserServiceImpl implements RegularUserService{
 
     }
 
+    @Override
+    public Boolean updatePenalNumber(Long id, Integer penalNumber){
+        RegularUser regularUser = findById(id);
+
+        if(regularUser.getPenalNumber() == null) regularUser.setPenalNumber(penalNumber);
+        else regularUser.setPenalNumber(regularUser.getPenalNumber() + penalNumber);
+         
+        RegularUser updatedRegularUser = regularUserRepository.save(regularUser);
+
+        if(updatedRegularUser.getPenalNumber() > regularUser.getPenalNumber()) return true;
+
+        return false;
+    }
+
 }

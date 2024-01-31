@@ -448,13 +448,15 @@ INSERT INTO
         user_id,
         is_enabled,
         company_information,
-        profession
+        profession,
+        penal_number
     )
 VALUES (
         6,
         true,
         'Privatna bolnica NewHospital',
-        'Secretary'
+        'Secretary',
+        0
     );
 
 insert into
@@ -485,7 +487,7 @@ insert into
         regular_user_id
     )
 values
-('2023-12-26', '20', 2, null);
+('2024-02-03', '20', 2, null);
 
 insert into
     appointment(
@@ -495,4 +497,4 @@ insert into
         regular_user_id
     )
 values
-('2023-12-27', '30', 2, null);
+('2024-02-04', '30', 2, null);

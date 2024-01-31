@@ -10,4 +10,6 @@ public interface RegularUserService {
     public RegularUser confirmEmail(String confirmationToken);
  
     public RegularUser findById(Long id);
+
+    public Boolean updatePenalNumber(Long id, Integer penalNumber);
 }
