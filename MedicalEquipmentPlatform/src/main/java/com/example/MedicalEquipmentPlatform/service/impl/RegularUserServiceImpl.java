@@ -92,6 +92,12 @@ public class RegularUserServiceImpl implements RegularUserService{
          
         RegularUser updatedRegularUser = regularUserRepository.save(regularUser);
 
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(updatedRegularUser.getEmail());
+        mailMessage.setSubject("Quit appointment info");
+        mailMessage.setText("You successfully quit appointment, and get "+penalNumber+" penal/s.\n"+"Now you have "+updatedRegularUser.getPenalNumber()+" penal/s");
+        emailService.sendEmail(mailMessage);
+
         if(updatedRegularUser.getPenalNumber() > regularUser.getPenalNumber()) return true;
 
         return false;

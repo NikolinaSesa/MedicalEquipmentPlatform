@@ -467,7 +467,7 @@ insert into
         regular_user_id
     )
 values
-('2023-12-25', '20', 2, null);
+('2024-06-20', '20', 2, null);
 
 insert into
     appointment(
@@ -477,7 +477,7 @@ insert into
         regular_user_id
     )
 values
-('2023-12-25', '10', 2, null);
+('2024-06-21', '10', 2, null);
 
 insert into
     appointment(
@@ -487,7 +487,7 @@ insert into
         regular_user_id
     )
 values
-('2024-02-03', '20', 2, null);
+('2024-06-22', '20', 2, null);
 
 insert into
     appointment(
@@ -497,4 +497,4 @@ insert into
         regular_user_id
     )
 values
-('2024-02-04', '30', 2, null);
+('2024-06-24', '30', 2, null);

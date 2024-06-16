@@ -22,7 +22,7 @@ const MyReservations = () => {
         ).catch(err => console.log(err))
     }, [])
 
-    const handleQuit = val => {
+    function handleQuit(val){
         console.log(val);
 
         fetch("http://localhost:8080/api/appointment/quitAppointment", {
@@ -36,7 +36,7 @@ const MyReservations = () => {
         ).then((result) => {
             console.log(result);
             window.alert("You successfully quit appointment.");
-            //window.location.reload();
+            window.location.reload();
         }
         ).catch((err) => console.log(err))
     }
@@ -67,8 +67,16 @@ const MyReservations = () => {
                                     </ListItem>
                                 ))}
                             </List>
-                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3'}}>View Details</ListItemButton>
-                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3'}} onClick={handleQuit(val)}>Quit</ListItemButton>
+                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3', borderRadius: '10px', margin: '10px', textAlign: 'center'}} onClick={(e) => {
+                                    e.preventDefault();
+                                    window.location.href = `/appointmentPDF?id=${val.id}`;
+                                }
+                            }>View Details</ListItemButton>
+                            <ListItemButton sx={{width: '100px', border: '2px solid #0056b3', borderRadius: '10px', margin: '10px', textAlign: 'center'}} onClick={(e) => {
+                                    e.preventDefault();
+                                    handleQuit(val);
+                                }
+                            }>Quit</ListItemButton>
                         </ListItem>
                     ))}
                 </List>
